@@ -270,7 +270,7 @@ class ZohoProductController
         $body = $data;
 
         try {
-            $response = $client->request('PUT', $apiURL, ['headers' => $headers, 'body' => json_encode($body)]);
+            $response = $client->request('POST', $apiURL, ['headers' => $headers, 'body' => json_encode($body)]);
             $statusCode = $response->getStatusCode();
             $responseBody = json_decode($response->getBody(), true);
         } catch (\Exception $e) {
