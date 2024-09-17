@@ -8,6 +8,7 @@ use AliMehraei\ZohoAllInOne\Http\Controllers\Other\ZohoCompositeAPIController;
 use AliMehraei\ZohoAllInOne\Http\Controllers\Records\ZohoAvailabilityController;
 use AliMehraei\ZohoAllInOne\Http\Controllers\Records\ZohoCallController;
 use AliMehraei\ZohoAllInOne\Http\Controllers\Functions\ZohoFunctionApiController;
+use AliMehraei\ZohoAllInOne\Http\Controllers\Records\ZohoCustomerController;
 use AliMehraei\ZohoAllInOne\Http\Controllers\Records\ZohoManufactureController;
 use AliMehraei\ZohoAllInOne\Http\Controllers\Records\ZohoPurchaseOrderController;
 use AliMehraei\ZohoAllInOne\Http\Controllers\Records\ZohoRecordCountController;
@@ -130,8 +131,14 @@ class ZohoAllInOne
     {
         return ZohoContactController::getImage($zoho_contact_id);
     }
-
     // end - contact functions
+
+    // start - customers functions
+    public static function createCustomer($data = [])
+    {
+        return ZohoCustomerController::create($data);
+    }
+    // end - customers functions
 
     // start - accounts functions
     public static function getAccounts($page_token = null)
@@ -487,6 +494,11 @@ class ZohoAllInOne
     }
 
     // end - leads functions
+
+    public static function createSaleOrder($data = [])
+    {
+        return ZohoSaleOrderController::create($data);
+    }
 
     public static function getSaleOrders($organization_id, $page = 1, $condition = '')
     {
