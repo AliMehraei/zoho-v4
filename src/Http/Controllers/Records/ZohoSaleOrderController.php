@@ -43,6 +43,42 @@ class ZohoSaleOrderController
         return $responseBody;
     }
 
+    public static function update($data = [])
+    {
+        $sales_order_id = $data['id'] ?? null;
+        $organization_id = $data['organization_id'] ?? null;
+        unset($data['id']);
+        unset($data['organization_id']);
+        $token = ZohoTokenCheck::getToken();
+        if (!$token || !$organization_id) {
+            return [
+                'code' => 498,
+                'message' => 'Invalid/missing token or organization ID.',
+            ];
+        }
+        $apiURL = config('zoho-v4.books_api_base_url') . '/books/v3/salesorders/'.$sales_order_id.'?organization_id=' . $organization_id;
+
+        $client = new Client();
+
+        $headers = [
+            'Authorization' => 'Zoho-oauthtoken ' . $token->access_token,
+        ];
+
+        $body = $data;
+
+        try {
+            $response = $client->request('PUT', $apiURL, ['headers' => $headers, 'body' => json_encode($body)]);
+            $statusCode = $response->getStatusCode();
+            $responseBody = json_decode($response->getBody(), true);
+        } catch (\Exception $e) {
+            $responseBody = [
+                'code' => $e->getCode(),
+                'message' => $e->getMessage(),
+            ];
+        }
+        return $responseBody;
+    }
+
     public static function getAll($organization_id, $page = 1, $condition = '')
     {
         $token = ZohoTokenCheck::getToken();

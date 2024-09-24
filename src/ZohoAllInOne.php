@@ -495,9 +495,14 @@ class ZohoAllInOne
 
     // end - leads functions
 
-    public static function createSaleOrder($data = [])
+    public static function createSalesOrder($data = [])
     {
         return ZohoSaleOrderController::create($data);
+    }
+
+    public static function updateSalesOrder($data = [])
+    {
+        return ZohoSaleOrderController::update($data);
     }
 
     public static function getSaleOrders($organization_id, $page = 1, $condition = '')
