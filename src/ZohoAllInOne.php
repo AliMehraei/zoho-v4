@@ -505,6 +505,11 @@ class ZohoAllInOne
         return ZohoSaleOrderController::update($data);
     }
 
+    public static function addAttachmentToSalesOrder($data = [])
+    {
+        return ZohoSaleOrderController::addAttachment($data);
+    }
+
     public static function getSaleOrders($organization_id, $page = 1, $condition = '')
     {
         return ZohoSaleOrderController::getAll($organization_id, $page, $condition);

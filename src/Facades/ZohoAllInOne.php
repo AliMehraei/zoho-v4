@@ -92,6 +92,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static mixed conversionOptionsLead(array $data)
  * @method static mixed createSalesOrder(array $data = [])
  * @method static mixed updateSalesOrder(array $data = [])
+ * @method static mixed addAttachmentToSalesOrder(array $data = [])
  * @method static array getSaleOrders(int $organization_id, int $page = 1, string $condition = '')
  * @method static mixed getSaleOrder(int $sale_order_id, int|null $organization_id = null)
  * @method static mixed getCRMSaleOrder(int $sale_order_id)
