@@ -510,6 +510,16 @@ class ZohoAllInOne
         return ZohoSaleOrderController::addAttachment($data);
     }
 
+    public static function deleteAttachmentFromSalesOrder($data = [])
+    {
+        return ZohoSaleOrderController::deleteAttachment($data);
+    }
+
+    public static function requestApprovalForSalesOrder($data = [])
+    {
+        return ZohoSaleOrderController::requestApproval($data);
+    }
+
     public static function getSaleOrders($organization_id, $page = 1, $condition = '')
     {
         return ZohoSaleOrderController::getAll($organization_id, $page, $condition);

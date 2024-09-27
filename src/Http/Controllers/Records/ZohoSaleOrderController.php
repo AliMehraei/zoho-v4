@@ -438,7 +438,7 @@ class ZohoSaleOrderController
         $file_path = $data['file_path'] ?? null;
 
         $token = ZohoTokenCheck::getToken();
-        if (!$token || !$sales_order_id || !$organization_id || !$file_path || !file_exists(storage_path('app/assets/'.$file_path))) {
+        if (!$token || !$sales_order_id || !$organization_id || !$file_path || !file_exists(storage_path('app/assets/' . $file_path))) {
             return [
                 'code' => 498,
                 'message' => 'Invalid/missing token or required parameters or file not found.',
@@ -460,7 +460,7 @@ class ZohoSaleOrderController
                 'multipart' => [
                     [
                         'name' => 'attachment',
-                        'contents' => fopen(storage_path('app/assets/'.$file_path), 'r'),
+                        'contents' => fopen(storage_path('app/assets/' . $file_path), 'r'),
                         'filename' => basename($file_path),
                     ],
                 ],
@@ -481,5 +481,87 @@ class ZohoSaleOrderController
         }
     }
 
+    public static function deleteAttachment($data = [])
+    {
+        $sales_order_id = $data['id'] ?? null;
+        $organization_id = $data['organization_id'] ?? null;
+
+        $token = ZohoTokenCheck::getToken();
+        if (!$token || !$sales_order_id || !$organization_id) {
+            return [
+                'code' => 498,
+                'message' => 'Invalid/missing token or required parameters .',
+            ];
+        }
+
+
+        $apiURL = config('zoho-v4.books_api_base_url') . '/books/v3/salesorders/' . $sales_order_id . '/attachment?organization_id=' . $organization_id;
+
+        $client = new Client();
+
+        $headers = [
+            'Authorization' => 'Zoho-oauthtoken ' . $token->access_token,
+        ];
+
+        try {
+            $response = $client->request('DELETE', $apiURL, [
+                'headers' => $headers,
+            ]);
+
+            $statusCode = $response->getStatusCode();
+            $responseBody = json_decode($response->getBody(), true);
+
+            return [
+                'code' => $statusCode,
+                'response' => $responseBody,
+            ];
+        } catch (\Exception $e) {
+            return [
+                'code' => $e->getCode(),
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
+
+    public static function requestApproval($data = [])
+    {
+        $sales_order_id = $data['id'] ?? null;
+        $organization_id = $data['organization_id'] ?? null;
+
+        $token = ZohoTokenCheck::getToken();
+        if (!$token || !$sales_order_id || !$organization_id) {
+            return [
+                'code' => 498,
+                'message' => 'Invalid/missing token or required parameters.',
+            ];
+        }
+
+        $apiURL = config('zoho-v4.books_api_base_url') . '/books/v3/salesorders/' . $sales_order_id . '/submit?organization_id=' . $organization_id;
+
+        $client = new Client();
+
+        $headers = [
+            'Authorization' => 'Zoho-oauthtoken ' . $token->access_token,
+        ];
+
+        try {
+            $response = $client->request('POST', $apiURL, [
+                'headers' => $headers,
+            ]);
+
+            $statusCode = $response->getStatusCode();
+            $responseBody = json_decode($response->getBody(), true);
+
+            return [
+                'code' => $statusCode,
+                'response' => $responseBody,
+            ];
+        } catch (\Exception $e) {
+            return [
+                'code' => $e->getCode(),
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
 
 }
