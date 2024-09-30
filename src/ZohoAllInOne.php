@@ -520,6 +520,11 @@ class ZohoAllInOne
         return ZohoSaleOrderController::requestApproval($data);
     }
 
+    public static function getSalesOrderComments($data = [])
+    {
+        return ZohoSaleOrderController::getComments($data);
+    }
+
     public static function getSaleOrders($organization_id, $page = 1, $condition = '')
     {
         return ZohoSaleOrderController::getAll($organization_id, $page, $condition);
