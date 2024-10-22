@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static array getUsers(string|null $page_token = null)
  * @method static array getContacts(string|null $page_token = null)
  * @method static mixed getContact(int $zoho_contact_id)
+ * @method static mixed getBooksContact(int $organization_id, int $contact_id)
  * @method static mixed getContactSecond(int $zoho_contact_id)
  * @method static mixed getContactByEmailAddress(string $zoho_email)
  * @method static mixed createContact(array $data = [])
