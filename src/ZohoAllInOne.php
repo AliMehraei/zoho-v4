@@ -628,6 +628,11 @@ class ZohoAllInOne
         return ZohoPurchaseOrderController::createV6($data);
     }
 
+    public static function getPurchaseOrderComments($data = [])
+    {
+        return ZohoPurchaseOrderController::getComments($data);
+    }
+
     // end -  purchase order functions
 
 

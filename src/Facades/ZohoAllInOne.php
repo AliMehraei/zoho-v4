@@ -116,6 +116,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static mixed getPurchaseOrderPDF(int $sale_order_id, int $organization_id)
  * @method static mixed updatePurchaseOrderV2_2(array $data = [])
  * @method static mixed createPurchaseOrderV6(array $data)
+ * @method static mixed getPurchaseOrderComments(array $data = [])
  * @method static array getOrganizations()
  * @method static mixed getRFQ(int $rfq_id)
  * @method static mixed setRFQAlternative(int $rfq_id, int $product_id)
