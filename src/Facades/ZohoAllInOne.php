@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static mixed compositeAPI(array $requests)
  * @method static array getUsers(string|null $page_token = null)
  * @method static array getContacts(string|null $page_token = null)
+ * @method static array getContactsZB(int $organization_id, int $page = 1, string $condition = '')
  * @method static mixed getContact(int $zoho_contact_id)
  * @method static mixed getBooksContact(int $organization_id, int $contact_id)
  * @method static mixed getContactSecond(int $zoho_contact_id)

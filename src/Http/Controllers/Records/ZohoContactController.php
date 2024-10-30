@@ -93,6 +93,37 @@ class ZohoContactController
         return $responseBody;
     }
 
+    public static function getAllFromBooks($organization_id, $page = 1, $condition = '')
+    {
+
+        $token = ZohoTokenCheck::getToken();
+        if (!$token || !$organization_id) {
+            return [
+                'code' => 498,
+                'message' => 'Invalid/missing token or organization ID.',
+            ];
+        }
+        $apiURL = config('zoho-v4.books_api_base_url') . '/books/v3/contacts?organization_id=' . $organization_id . '&page=' . $page . $condition;
+
+        $client = new Client();
+
+        $headers = [
+            'Authorization' => 'Zoho-oauthtoken ' . $token->access_token,
+        ];
+
+        try {
+            $response = $client->request('GET', $apiURL, ['headers' => $headers]);
+            $statusCode = $response->getStatusCode();
+            $responseBody = json_decode($response->getBody(), true);
+        } catch (\Exception $e) {
+            $responseBody = [
+                'code' => $e->getCode(),
+                'message' => $e->getMessage(),
+            ];
+        }
+        return $responseBody;
+    }
+
     public static function getZBContactById($organization_id, $contact_id)
     {
         $token = ZohoTokenCheck::getToken();

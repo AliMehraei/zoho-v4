@@ -82,6 +82,11 @@ class ZohoAllInOne
         return ZohoContactController::getAll($page_token);
     }
 
+    public static function getContactsZB($organization_id, $page = 1, $condition = '')
+    {
+        return ZohoContactController::getAllFromBooks($organization_id, $page, $condition);
+    }
+
     public static function getContact($zoho_contact_id)
     {
         return ZohoContactController::getById($zoho_contact_id);
