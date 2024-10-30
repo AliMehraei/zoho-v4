@@ -82,6 +82,11 @@ class ZohoAllInOne
         return ZohoContactController::getAll($page_token);
     }
 
+    public static function getContactsZB($organization_id, $page = 1, $condition = '')
+    {
+        return ZohoContactController::getAllFromBooks($organization_id, $page, $condition);
+    }
+
     public static function getContact($zoho_contact_id)
     {
         return ZohoContactController::getById($zoho_contact_id);
@@ -927,6 +932,11 @@ class ZohoAllInOne
     public static function deleteAttachment($zoho_module_name, $zoho_record_id, $zoho_attachment_id)
     {
         return ZohoAttachmentController::delete($zoho_module_name, $zoho_record_id, $zoho_attachment_id);
+    }
+
+    public static function getAllAttachmentFromZohoBooks($data=[])
+    {
+        return ZohoAttachmentController::getAllFromZohoBooks($data);
     }
     // end - attachments functions
 
