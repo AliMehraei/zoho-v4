@@ -928,6 +928,11 @@ class ZohoAllInOne
     {
         return ZohoAttachmentController::delete($zoho_module_name, $zoho_record_id, $zoho_attachment_id);
     }
+
+    public static function getAllAttachmentFromZohoBooks($data=[])
+    {
+        return ZohoAttachmentController::getAllFromZohoBooks($data);
+    }
     // end - attachments functions
 
     // start - Email functions
