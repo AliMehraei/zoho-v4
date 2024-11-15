@@ -322,4 +322,45 @@ class ZohoInvoiceController
         return $responseBody;
     }
 
+    public static function getComments($data = [])
+    {
+        $invoice_id = $data['id'] ?? null;
+        $organization_id = $data['organization_id'] ?? null;
+
+        $token = ZohoTokenCheck::getToken();
+        if (!$token || !$invoice_id || !$organization_id) {
+            return [
+                'code' => 498,
+                'message' => 'Invalid/missing token or required parameters.',
+            ];
+        }
+
+        $apiURL = config('zoho-v4.books_api_base_url') . '/books/v3/invoices/' . $invoice_id . '/comments?organization_id=' . $organization_id;
+
+        $client = new Client();
+
+        $headers = [
+            'Authorization' => 'Zoho-oauthtoken ' . $token->access_token,
+        ];
+
+        try {
+            $response = $client->request('GET', $apiURL, [
+                'headers' => $headers,
+            ]);
+
+            $statusCode = $response->getStatusCode();
+            $responseBody = json_decode($response->getBody(), true);
+
+            return [
+                'code' => $statusCode,
+                'response' => $responseBody,
+            ];
+        } catch (\Exception $e) {
+            return [
+                'code' => $e->getCode(),
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
+
 }
