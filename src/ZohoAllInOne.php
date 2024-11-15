@@ -440,6 +440,12 @@ class ZohoAllInOne
         return ZohoInvoiceController::getHTML($invoice_id, $organization_id);
     }
 
+    public static function getInvoiceComments($data = [])
+    {
+        return ZohoInvoiceController::getComments($data);
+    }
+
+
     // end - invoice functions
 
 
