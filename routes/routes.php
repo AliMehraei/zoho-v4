@@ -7,7 +7,7 @@ use AliMehraei\ZohoAllInOne\Http\Controllers\Auth\ZohoTokenCheck;
 Route::group([
     'middleware' => ['web']
 ], function () {
-    Route::any('zoho_oauth2callback/', [ZohoTokenCheck::class, 'saveTokens'])->name('zoho.save.tokens');
+    Route::any('zoho_oauth2callback/{organizationId?}', [ZohoTokenCheck::class, 'saveTokens'])->name('zoho.save.tokens');
 
 });
 
