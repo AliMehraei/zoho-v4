@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static array contactsSearch(string $phrase, int $page = 1, int $perPage = 200)
  * @method static mixed getContactImage(int $zoho_contact_id)
  * @method static mixed createCustomer(array $data = [])
+ * @method static mixed updateCustomer(array $data = [])
  * @method static array getAccounts(string|null $page_token = null)
  * @method static mixed getAccountContacts(int $zoho_crm_account_id)
  * @method static mixed createAccount(array $data)

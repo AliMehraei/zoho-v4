@@ -101,7 +101,7 @@ class ZohoCustomTokenStore
         if (array_key_exists('error', $refreshed_token_resp ?? [])) {
             return null;
         }
-        $token->organization_id = $organizationId ?? 0;
+        $token->organization_id = $organizationId ?? 1;
         $token->access_token = $refreshed_token_resp['access_token'];
         $now = Carbon::now();
         $token->expiry_time = $now->add($refreshed_token_resp['expires_in'], 'seconds');

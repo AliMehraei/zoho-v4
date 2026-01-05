@@ -14,7 +14,7 @@ class ZohoTokenCheck
     {
         $org = $organizationId ?: config('zoho-v4.current_internal_organization_id');
 
-        $zoho_token = ZohoToken::query()->where('organization_id', '=', $org ?? 0)->latest()->first();
+        $zoho_token = ZohoToken::query()->where('organization_id', '=', $org ?? 1)->latest()->first();
         if ($zoho_token) {
             $expiry_time = Carbon::parse($zoho_token->expiry_time);
             if ($expiry_time->lt(Carbon::now())) {
