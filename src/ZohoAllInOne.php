@@ -148,6 +148,11 @@ class ZohoAllInOne
     {
         return ZohoCustomerController::create($data);
     }
+
+    public static function updateCustomer($data = [])
+    {
+        return ZohoCustomerController::update($data);
+    }
     // end - customers functions
 
     // start - accounts functions

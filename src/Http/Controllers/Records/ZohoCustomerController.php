@@ -42,4 +42,42 @@ class ZohoCustomerController
         return $responseBody;
     }
 
+    public static function update($data = [])
+    {
+        $organization_id = $data['organization_id'] ?? null;
+        $contact_id = $data['contact_id'] ?? null;
+        unset($data['organization_id']);
+        unset($data['contact_id']);
+
+        $token = ZohoTokenCheck::getToken();
+        if (!$token || !$organization_id || !$contact_id) {
+            return [
+                'code' => 498,
+                'message' => 'Invalid/missing token, organization ID, or contact ID.',
+            ];
+        }
+        $apiURL = config('zoho-v4.books_api_base_url') . '/books/v3/contacts/' . $contact_id . '?organization_id=' . $organization_id;
+
+        $client = new Client();
+
+        $headers = [
+            'Authorization' => 'Zoho-oauthtoken ' . $token->access_token,
+            'Content-Type' => 'application/json',
+        ];
+
+        $body = $data;
+
+        try {
+            $response = $client->request('PUT', $apiURL, ['headers' => $headers, 'body' => json_encode($body)]);
+            $statusCode = $response->getStatusCode();
+            $responseBody = json_decode($response->getBody(), true);
+        } catch (\Exception $e) {
+            $responseBody = [
+                'code' => $e->getCode(),
+                'message' => $e->getMessage(),
+            ];
+        }
+        return $responseBody;
+    }
+
 }
